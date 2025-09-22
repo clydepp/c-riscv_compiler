@@ -1,0 +1,94 @@
+digraph AST {
+    node [shape=box];
+
+    // Translation Unit
+    translation_unit -> function_declaration_g;
+    translation_unit -> function_definition_f;
+
+    // Function Declaration: int g();
+    function_declaration_g -> declaration_specifiers_g;
+    function_declaration_g -> declarator_g;
+
+    // Declaration Specifiers for g
+    declaration_specifiers_g -> type_specifier_INT_g;
+
+    // Declarator for g
+    declarator_g -> direct_declarator_g;
+    direct_declarator_g -> IDENTIFIER_g;
+
+    // Function Definition: int f() { return g(); }
+    function_definition_f -> declaration_specifiers_f;
+    function_definition_f -> declarator_f;
+    function_definition_f -> compound_statement_f;
+
+    // Declaration Specifiers for f
+    declaration_specifiers_f -> type_specifier_INT_f;
+
+    // Declarator for f
+    declarator_f -> direct_declarator_f;
+    direct_declarator_f -> IDENTIFIER_f;
+
+    // Compound Statement for f
+    compound_statement_f -> statement_list_f;
+
+    // Statement List for f
+    statement_list_f -> return_statement_f;
+
+    // Return Statement for f
+    return_statement_f -> expression_return_f;
+
+    // Expression for return
+    expression_return_f -> assignment_expression_return_f;
+
+    // Assignment Expression for return
+    assignment_expression_return_f -> conditional_expression_return_f;
+
+    // Conditional Expression for return
+    conditional_expression_return_f -> logical_or_expression_return_f;
+
+    // Logical OR Expression for return
+    logical_or_expression_return_f -> logical_and_expression_return_f;
+
+    // Logical AND Expression for return
+    logical_and_expression_return_f -> inclusive_or_expression_return_f;
+
+    // Inclusive OR Expression for return
+    inclusive_or_expression_return_f -> exclusive_or_expression_return_f;
+
+    // Exclusive OR Expression for return
+    exclusive_or_expression_return_f -> and_expression_return_f;
+
+    // AND Expression for return
+    and_expression_return_f -> equality_expression_return_f;
+
+    // Equality Expression for return
+    equality_expression_return_f -> relational_expression_return_f;
+
+    // Relational Expression for return
+    relational_expression_return_f -> shift_expression_return_f;
+
+    // Shift Expression for return
+    shift_expression_return_f -> additive_expression_return_f;
+
+    // Additive Expression for return
+    additive_expression_return_f -> multiplicative_expression_return_f;
+
+    // Multiplicative Expression for return
+    multiplicative_expression_return_f -> cast_expression_return_f;
+
+    // Cast Expression for return
+    cast_expression_return_f -> unary_expression_return_f;
+
+    // Unary Expression for return
+    unary_expression_return_f -> postfix_expression_return_f;
+
+    // Postfix Expression for return
+    postfix_expression_return_f -> function_call_g;
+
+    // Function Call: g()
+    function_call_g -> IDENTIFIER_g_call;
+    function_call_g -> argument_expression_list_g;
+
+    // Argument Expression List for g()
+    argument_expression_list_g -> nullptr; // No arguments
+}

@@ -1,0 +1,59 @@
+digraph AST {
+    node [shape=box, fontname="Courier", fontsize=10];
+
+    // Root node: declaration
+    declaration [label="declaration"];
+    declaration_specifiers [label="declaration_specifiers: INT"];
+    init_declarator_list [label="init_declarator_list"];
+    declaration -> declaration_specifiers;
+    declaration -> init_declarator_list;
+
+    // init_declarator_list: Variable declaration
+    init_declarator [label="init_declarator"];
+    init_declarator_list -> init_declarator;
+
+    // init_declarator: x = 5
+    declarator [label="declarator"];
+    initializer [label="initializer: assignment_expression"];
+    init_declarator -> declarator;
+    init_declarator -> initializer;
+
+    // declarator: DirectDeclarator for variable name 'x'
+    direct_declarator [label="direct_declarator: IDENTIFIER(x)"];
+    declarator -> direct_declarator;
+
+    // initializer: assignment_expression for '5'
+    assignment_expression [label="assignment_expression"];
+    conditional_expression [label="conditional_expression"];
+    logical_or_expression [label="logical_or_expression"];
+    logical_and_expression [label="logical_and_expression"];
+    inclusive_or_expression [label="inclusive_or_expression"];
+    exclusive_or_expression [label="exclusive_or_expression"];
+    and_expression [label="and_expression"];
+    equality_expression [label="equality_expression"];
+    relational_expression [label="relational_expression"];
+    shift_expression [label="shift_expression"];
+    additive_expression [label="additive_expression"];
+    multiplicative_expression [label="multiplicative_expression"];
+    cast_expression [label="cast_expression"];
+    unary_expression [label="unary_expression"];
+    postfix_expression [label="postfix_expression"];
+    primary_expression [label="primary_expression: INT_CONSTANT(5)"];
+
+    initializer -> assignment_expression;
+    assignment_expression -> conditional_expression;
+    conditional_expression -> logical_or_expression;
+    logical_or_expression -> logical_and_expression;
+    logical_and_expression -> inclusive_or_expression;
+    inclusive_or_expression -> exclusive_or_expression;
+    exclusive_or_expression -> and_expression;
+    and_expression -> equality_expression;
+    equality_expression -> relational_expression;
+    relational_expression -> shift_expression;
+    shift_expression -> additive_expression;
+    additive_expression -> multiplicative_expression;
+    multiplicative_expression -> cast_expression;
+    cast_expression -> unary_expression;
+    unary_expression -> postfix_expression;
+    postfix_expression -> primary_expression;
+}

@@ -1,0 +1,237 @@
+digraph AST {
+    node [shape=box, fontname="Courier", fontsize=10];
+
+    // Root node: function_definition
+    function_definition [label="function_definition"];
+    declaration_specifiers [label="declaration_specifiers: INT"];
+    declarator [label="declarator"];
+    compound_statement [label="compound_statement"];
+
+    // function_definition structure
+    function_definition -> declaration_specifiers;
+    function_definition -> declarator;
+    function_definition -> compound_statement;
+
+    // declarator: DirectDeclarator for function name 'f'
+    direct_declarator [label="direct_declarator: IDENTIFIER(f)"];
+    declarator -> direct_declarator;
+
+    // compound_statement: Body of the function
+    statement_list [label="statement_list"];
+    compound_statement -> statement_list;
+
+    // statement_list: Contains three statements
+    declaration [label="declaration"];
+    expression_statement [label="expression_statement"];
+    jump_statement [label="jump_statement: return"];
+    statement_list -> declaration;
+    statement_list -> expression_statement;
+    statement_list -> jump_statement;
+
+    // declaration: int x = 5;
+    declaration_specifiers2 [label="declaration_specifiers: INT"];
+    init_declarator_list [label="init_declarator_list"];
+    declaration -> declaration_specifiers2;
+    declaration -> init_declarator_list;
+
+    // init_declarator_list: Variable declaration
+    init_declarator [label="init_declarator"];
+    init_declarator_list -> init_declarator;
+
+    // init_declarator: x = 5
+    declarator2 [label="declarator"];
+    initializer [label="initializer: assignment_expression"];
+    init_declarator -> declarator2;
+    init_declarator -> initializer;
+
+    // declarator2: DirectDeclarator for variable name 'x'
+    direct_declarator2 [label="direct_declarator: IDENTIFIER(x)"];
+    declarator2 -> direct_declarator2;
+
+    // initializer: assignment_expression for '5'
+    assignment_expression [label="assignment_expression"];
+    conditional_expression [label="conditional_expression"];
+    logical_or_expression [label="logical_or_expression"];
+    logical_and_expression [label="logical_and_expression"];
+    inclusive_or_expression [label="inclusive_or_expression"];
+    exclusive_or_expression [label="exclusive_or_expression"];
+    and_expression [label="and_expression"];
+    equality_expression [label="equality_expression"];
+    relational_expression [label="relational_expression"];
+    shift_expression [label="shift_expression"];
+    additive_expression [label="additive_expression"];
+    multiplicative_expression [label="multiplicative_expression"];
+    cast_expression [label="cast_expression"];
+    unary_expression [label="unary_expression"];
+    postfix_expression [label="postfix_expression"];
+    primary_expression [label="primary_expression: INT_CONSTANT(5)"];
+
+    initializer -> assignment_expression;
+    assignment_expression -> conditional_expression;
+    conditional_expression -> logical_or_expression;
+    logical_or_expression -> logical_and_expression;
+    logical_and_expression -> inclusive_or_expression;
+    inclusive_or_expression -> exclusive_or_expression;
+    exclusive_or_expression -> and_expression;
+    and_expression -> equality_expression;
+    equality_expression -> relational_expression;
+    relational_expression -> shift_expression;
+    shift_expression -> additive_expression;
+    additive_expression -> multiplicative_expression;
+    multiplicative_expression -> cast_expression;
+    cast_expression -> unary_expression;
+    unary_expression -> postfix_expression;
+    postfix_expression -> primary_expression;
+
+    // expression_statement: x = 4;
+    expression [label="expression"];
+    expression_statement -> expression;
+
+    // expression: x = 4
+    assignment_expression2 [label="assignment_expression"];
+    expression -> assignment_expression2;
+
+    // assignment_expression2: x = 4
+    unary_expression2 [label="unary_expression"];
+    assignment_operator [label="assignment_operator: ="];
+    assignment_expression3 [label="assignment_expression"];
+    assignment_expression2 -> unary_expression2;
+    assignment_expression2 -> assignment_operator;
+    assignment_expression2 -> assignment_expression3;
+
+    // unary_expression2: x
+    postfix_expression2 [label="postfix_expression"];
+    unary_expression2 -> postfix_expression2;
+
+    // postfix_expression2: x
+    primary_expression2 [label="primary_expression: IDENTIFIER(x)"];
+    postfix_expression2 -> primary_expression2;
+
+    // assignment_expression3: 4
+    conditional_expression2 [label="conditional_expression"];
+    assignment_expression3 -> conditional_expression2;
+
+    // conditional_expression2: 4
+    logical_or_expression2 [label="logical_or_expression"];
+    conditional_expression2 -> logical_or_expression2;
+
+    // logical_or_expression2: 4
+    logical_and_expression2 [label="logical_and_expression"];
+    logical_or_expression2 -> logical_and_expression2;
+
+    // logical_and_expression2: 4
+    inclusive_or_expression2 [label="inclusive_or_expression"];
+    logical_and_expression2 -> inclusive_or_expression2;
+
+    // inclusive_or_expression2: 4
+    exclusive_or_expression2 [label="exclusive_or_expression"];
+    inclusive_or_expression2 -> exclusive_or_expression2;
+
+    // exclusive_or_expression2: 4
+    and_expression2 [label="and_expression"];
+    exclusive_or_expression2 -> and_expression2;
+
+    // and_expression2: 4
+    equality_expression2 [label="equality_expression"];
+    and_expression2 -> equality_expression2;
+
+    // equality_expression2: 4
+    relational_expression2 [label="relational_expression"];
+    equality_expression2 -> relational_expression2;
+
+    // relational_expression2: 4
+    shift_expression2 [label="shift_expression"];
+    relational_expression2 -> shift_expression2;
+
+    // shift_expression2: 4
+    additive_expression2 [label="additive_expression"];
+    shift_expression2 -> additive_expression2;
+
+    // additive_expression2: 4
+    multiplicative_expression2 [label="multiplicative_expression"];
+    additive_expression2 -> multiplicative_expression2;
+
+    // multiplicative_expression2: 4
+    cast_expression2 [label="cast_expression"];
+    multiplicative_expression2 -> cast_expression2;
+
+    // cast_expression2: 4
+    unary_expression3 [label="unary_expression"];
+    cast_expression2 -> unary_expression3;
+
+    // unary_expression3: 4
+    postfix_expression3 [label="postfix_expression"];
+    unary_expression3 -> postfix_expression3;
+
+    // postfix_expression3: 4
+    primary_expression3 [label="primary_expression: INT_CONSTANT(4)"];
+    postfix_expression3 -> primary_expression3;
+
+    // jump_statement: return x;
+    expression2 [label="expression"];
+    jump_statement -> expression2;
+
+    // expression2: x
+    assignment_expression4 [label="assignment_expression"];
+    expression2 -> assignment_expression4;
+
+    // assignment_expression4: x
+    conditional_expression3 [label="conditional_expression"];
+    assignment_expression4 -> conditional_expression3;
+
+    // conditional_expression3: x
+    logical_or_expression3 [label="logical_or_expression"];
+    conditional_expression3 -> logical_or_expression3;
+
+    // logical_or_expression3: x
+    logical_and_expression3 [label="logical_and_expression"];
+    logical_or_expression3 -> logical_and_expression3;
+
+    // logical_and_expression3: x
+    inclusive_or_expression3 [label="inclusive_or_expression"];
+    logical_and_expression3 -> inclusive_or_expression3;
+
+    // inclusive_or_expression3: x
+    exclusive_or_expression3 [label="exclusive_or_expression"];
+    inclusive_or_expression3 -> exclusive_or_expression3;
+
+    // exclusive_or_expression3: x
+    and_expression3 [label="and_expression"];
+    exclusive_or_expression3 -> and_expression3;
+
+    // and_expression3: x
+    equality_expression3 [label="equality_expression"];
+    and_expression3 -> equality_expression3;
+
+    // equality_expression3: x
+    relational_expression3 [label="relational_expression"];
+    equality_expression3 -> relational_expression3;
+
+    // relational_expression3: x
+    shift_expression3 [label="shift_expression"];
+    relational_expression3 -> shift_expression3;
+
+    // shift_expression3: x
+    additive_expression3 [label="additive_expression"];
+    shift_expression3 -> additive_expression3;
+
+    // additive_expression3: x
+    multiplicative_expression3 [label="multiplicative_expression"];
+    additive_expression3 -> multiplicative_expression3;
+
+    // multiplicative_expression3: x
+    cast_expression3 [label="cast_expression"];
+    multiplicative_expression3 -> cast_expression3;
+
+    // cast_expression3: x
+    unary_expression4 [label="unary_expression"];
+    cast_expression3 -> unary_expression4;
+
+    // unary_expression4: x
+    postfix_expression4 [label="postfix_expression"];
+    unary_expression4 -> postfix_expression4;
+
+    // postfix_expression4: x
+    primary_expression4 [label="primary_expression: IDENTIFIER(x)"];
+    postfix_expression4 -> primary_expression4;
+}

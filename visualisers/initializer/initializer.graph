@@ -1,0 +1,18 @@
+digraph AST {
+    node [shape=box, fontname="Courier", fontsize=10];
+
+    // Root node: function_definition
+    function_definition [label="function_definition"];
+    declaration_specifiers [label="declaration_specifiers: INT"];
+    declarator [label="declarator"];
+    compound_statement [label="compound_statement: nullptr"];
+
+    // function_definition structure
+    function_definition -> declaration_specifiers;
+    function_definition -> declarator;
+    function_definition -> compound_statement;
+
+    // declarator: DirectDeclarator for function name 'f'
+    direct_declarator [label="direct_declarator: IDENTIFIER(f)"];
+    declarator -> direct_declarator;
+}
